@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLM نیٹ ورک - مکمل پلیٹ فارم</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--dark), var(--primary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background-color: #f5f7fa;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .content-header h2 {
+            color: var(--dark);
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-info p {
+            color: #666;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .card-header h3 {
+            color: var(--dark);
+        }
+        
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--dark);
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        /* Matrix Visualization */
+        .matrix-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .matrix-level {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        .matrix-node {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .matrix-node.self {
+            background-color: var(--secondary);
+        }
+        
+        .matrix-node.exited {
+            background-color: var(--accent);
+        }
+        
+        .matrix-node .node-name {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .matrix-node .node-bonus {
+            font-size: 0.7rem;
+            margin-top: 5px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Login/Register Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h3 {
+            color: var(--dark);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-footer {
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .modal-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Wallet Address Styles */
+        .wallet-address {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            word-break: break-all;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copy-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .crypto-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .crypto-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        /* Transaction History */
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .transaction-info h4 {
+            margin-bottom: 0.3rem;
+        }
+        
+        .transaction-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .transaction-amount.deposit {
+            color: var(--secondary);
+        }
+        
+        .transaction-amount.withdrawal {
+            color: var(--accent);
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-completed {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-failed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        /* QR Code */
+        .qr-code {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .qr-code img {
+            max-width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .transaction-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .transaction-amount {
+                align-self: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-network-wired"></i>
+                    <h1>MLM نیٹ ورک</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="home">ہوم</a></li>
+                        <li><a href="#" class="nav-link" data-target="plan">پلان</a></li>
+                        <li><a href="#" class="nav-link" data-target="matrix">میٹرکس</a></li>
+                        <li><a href="#" class="nav-link" data-target="commission">کمیشن</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">لاگ ان</button>
+                    <button class="btn btn-primary" id="registerBtn">سائن اپ</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="content-section active">
+            <div class="hero" style="text-align: center; padding: 4rem 0;">
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">اپنی مالی آزادی بنائیں</h2>
+                <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto 2rem;">ہمارے MLM نیٹ ورک میں شامل ہوں اور 1x5 میٹرکس سسٹم کے ساتھ زیادہ سے زیادہ کمائیں۔</p>
+                <button class="btn btn-primary" style="font-size: 1.2rem; padding: 0.8rem 2rem;">آج ہی شروع کریں</button>
+            </div>
+            
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: var(--primary);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>5,247</h3>
+                        <p>فعال ممبران</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: var(--secondary);">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>$1.2M</h3>
+                        <p>کل ادائیگیاں</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: var(--accent);">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>127</h3>
+                        <p>میٹرکس سائیکل مکمل</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Dashboard (Hidden by default) -->
+        <section id="userDashboard" class="content-section" style="display: none;">
+            <div class="dashboard">
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="dashboard-tab active" data-tab="overview"><i class="fas fa-tachometer-alt"></i> جائزہ</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="matrix"><i class="fas fa-sitemap"></i> میرا میٹرکس</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="unilevel"><i class="fas fa-layer-group"></i> یونی لیول</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="pins"><i class="fas fa-key"></i> پن خریداری</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="wallet"><i class="fas fa-wallet"></i> والیٹ</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="earnings"><i class="fas fa-money-bill-wave"></i> کمائی</a></li>
+                        <li><a href="#" class="dashboard-tab" data-tab="profile"><i class="fas fa-user"></i> پروفائل ترتیبات</a></li>
+                        <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> لاگ آؤٹ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="main-content">
+                    <!-- Overview Tab -->
+                    <div class="tab-content active" id="overview">
+                        <div class="content-header">
+                            <h2>ڈیش بورڈ جائزہ</h2>
+                            <span>خوش آمدید, <strong id="userName">جان ڈو</strong>!</span>
+                        </div>
+                        
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--primary);">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalEarnings">$0.00</h3>
+                                    <p>کل کمائی</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--secondary);">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="directReferrals">0</h3>
+                                    <p>براہ راست حوالہ جات</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--accent);">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="matrixCycles">0</h3>
+                                    <p>میٹرکس سائیکل</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>حالیہ سرگرمیاں</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>تاریخ</th>
+                                            <th>سرگرمی</th>
+                                            <th>رقم</th>
+                                            <th>حالت</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="activityTable">
+                                        <tr>
+                                            <td colspan="4" style="text-align: center;">کوئی حالیہ سرگرمی نہیں</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Matrix Tab -->
+                    <div class="tab-content" id="matrix">
+                        <div class="content-header">
+                            <h2>میرا میٹرکس</h2>
+                            <button class="btn btn-primary" id="buyPositionBtn">نیا پوزیشن خریدیں ($50)</button>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>موجودہ میٹرکس کی حالت</h3>
+                            </div>
+                            <div class="matrix-container">
+                                <div class="matrix-level">
+                                    <div class="matrix-node self">
+                                        <div class="node-name">آپ</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                </div>
+                                <div class="matrix-level">
+                                    <div class="matrix-node">
+                                        <div class="node-name">خالی</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                    <div class="matrix-node">
+                                        <div class="node-name">خالی</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                    <div class="matrix-node">
+                                        <div class="node-name">خالی</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                    <div class="matrix-node">
+                                        <div class="node-name">خالی</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                    <div class="matrix-node">
+                                        <div class="node-name">خالی</div>
+                                        <div class="node-bonus">0%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 1rem;">
+                                <p><strong>میٹرکس پیشرفت:</strong> <span id="matrixProgress">0/5</span> پوزیشنیں بھری گئیں</p>
+                                <p>جب میٹرکس پورا ہو جاتا ہے، تو آپ کو 200% بونس ملتا ہے اور آپ باہر نکل جاتے ہیں، لیکن آپ کی یونی لیول پوزیشن برقرار رہتی ہے۔</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Purchase Pins Tab -->
+                    <div class="tab-content" id="pins">
+                        <div class="content-header">
+                            <h2>پن خریداری</h2>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>پن کی قیمتیں</h3>
+                            </div>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>مقدار</th>
+                                            <th>فی پن قیمت</th>
+                                            <th>کل لاگت</th>
+                                            <th>عمل</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1-5 پن</td>
+                                            <td>$7.00</td>
+                                            <td id="cost1">$7.00</td>
+                                            <td>
+                                                <select id="pinQty1">
+                                                    <option value="1">1 پن</option>
+                                                    <option value="2">2 پن</option>
+                                                    <option value="3">3 پن</option>
+                                                    <option value="4">4 پن</option>
+                                                    <option value="5">5 پن</option>
+                                                </select>
+                                                <button class="btn btn-primary" onclick="purchasePins(1)">خریدیں</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>6-20 پن</td>
+                                            <td>$6.00</td>
+                                            <td id="cost2">$36.00</td>
+                                            <td>
+                                                <select id="pinQty2">
+                                                    <option value="6">6 پن</option>
+                                                    <option value="7">7 پن</option>
+                                                    <option value="10">10 پن</option>
+                                                    <option value="15">15 پن</option>
+                                                    <option value="20">20 پن</option>
+                                                </select>
+                                                <button class="btn btn-primary" onclick="purchasePins(2)">خریدیں</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>21+ پن</td>
+                                            <td>$5.00</td>
+                                            <td id="cost3">$105.00</td>
+                                            <td>
+                                                <select id="pinQty3">
+                                                    <option value="21">21 پن</option>
+                                                    <option value="25">25 پن</option>
+                                                    <option value="30">30 پن</option>
+                                                    <option value="50">50 پن</option>
+                                                    <option value="100">100 پن</option>
+                                                </select>
+                                                <button class="btn btn-primary" onclick="purchasePins(3)">خریدیں</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <p><strong>نوٹ:</strong> حوالہ لنک کے ذریعے شامل ہونے کے بعد، آپ کو پہلے پن خریدنا ہوگا، پھر $50 ڈپازٹ کرنا ہوگا۔</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Wallet Tab -->
+                    <div class="tab-content" id="wallet">
+                        <div class="content-header">
+                            <h2>والیٹ مینجمنٹ</h2>
+                        </div>
+                        
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--primary);">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="walletBalance">$0.00</h3>
+                                    <p>دستیاب بیلنس</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--secondary);">
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalDeposits">$0.00</h3>
+                                    <p>کل ڈپازٹ</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon" style="background-color: var(--accent);">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3 id="totalWithdrawals">$0.00</h3>
+                                    <p>کل واپسی</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>فنڈز ڈپازٹ کریں</h3>
+                            </div>
+                            <div class="crypto-info">
+                                <div class="crypto-icon">
+                                    <i class="fab fa-usdt"></i>
+                                </div>
+                                <div>
+                                    <h4>BEP20 USDT ڈپازٹ</h4>
+                                    <p>صرف BEP20 نیٹ ورک پر USDT اس پتے پر بھیجیں</p>
+                                </div>
+                            </div>
+                            
+                            <div class="wallet-address">
+                                <span id="companyWallet">0x252fbC5517345F08B48a77e718d379aeBb34Cf4E</span>
+                                <button class="copy-btn" onclick="copyToClipboard('companyWallet')">کاپی کریں</button>
+                            </div>
+                            
+                            <div class="qr-code">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=0x252fbC5517345F08B48a77e718d379aeBb34Cf4E" alt="QR Code">
+                                <p>ڈپازٹ کرنے کے لیے QR کوڈ اسکین کریں</p>
+                            </div>
+                            
+                            <div style="background-color: #fff3cd; padding: 1rem; border-radius: 4px; margin-top: 1rem;">
+                                <h4><i class="fas fa-exclamation-triangle"></i> اہم ہدایات:</h4>
+                                <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                    <li>صرف BEP20 نیٹ ورک پر USDT اس پتے پر بھیجیں</li>
+                                    <li>کسی دوسری کرپٹو کرنسی یا ٹوکن کو نہ بھیجیں</li>
+                                    <li>کم از کم ڈپازٹ: $50</li>
+                                    <li>ڈپازٹس 3 نیٹ ورک تصدیقات کے بعد کریڈٹ کی جائیں گی</li>
+                                    <li>اگر آپ کو کوئی مسئلہ ہو تو سپورٹ سے رابطہ کریں</li>
+                                </ul>
+                            </div>
+                            
+                            <div style="margin-top: 1.5rem;">
+                                <button class="btn btn-primary" onclick="markDepositAsPaid()">میں نے ڈپازٹ کر دیا ہے</button>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>فنڈز واپس لیں</h3>
+                            </div>
+                            <form id="withdrawForm">
+                                <div class="form-group">
+                                    <label for="withdrawAmount">واپس لینے کی مقدار (USD)</label>
+                                    <input type="number" id="withdrawAmount" class="form-control" min="10" step="0.01" placeholder="رقم درج کریں">
+                                    <small>کم از کم واپسی: $10</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="withdrawWallet">آپ کا BEP20 USDT والیٹ پتہ</label>
+                                    <input type="text" id="withdrawWallet" class="form-control" placeholder="اپنا والیٹ پتہ درج کریں">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">واپسی کی درخواست کریں</button>
+                                </div>
+                            </form>
+                            
+                            <div style="margin-top: 1.5rem;">
+                                <h4>محفوظ شدہ واپسی کا پتہ</h4>
+                                <div id="savedWalletAddress" class="wallet-address" style="display: none;">
+                                    <span id="userWalletAddress"></span>
+                                    <button class="btn btn-outline" onclick="editWalletAddress()">ترمیم</button>
+                                </div>
+                                <div id="noWalletAddress" style="text-align: center; padding: 1rem; color: #666;">
+                                    <p>ابھی تک کوئی والیٹ پتہ محفوظ نہیں کیا گیا</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>ٹرانزیکشن ہسٹری</h3>
+                            </div>
+                            <div id="transactionHistory">
+                                <div class="transaction-item">
+                                    <div class="transaction-details">
+                                        <div class="transaction-icon" style="background-color: var(--secondary);">
+                                            <i class="fas fa-arrow-down"></i>
+                                        </div>
+                                        <div class="transaction-info">
+                                            <h4>ڈپازٹ</h4>
+                                            <p>2023-10-15 14:30</p>
+                                            <span class="status-badge status-completed">مکمل</span>
+                                        </div>
+                                    </div>
+                                    <div class="transaction-amount deposit">+$50.00</div>
+                                </div>
+                                <div class="transaction-item">
+                                    <div class="transaction-details">
+                                        <div class="transaction-icon" style="background-color: var(--accent);">
+                                            <i class="fas fa-arrow-up"></i>
+                                        </div>
+                                        <div class="transaction-info">
+                                            <h4>واپسی</h4>
+                                            <p>2023-10-10 09:15</p>
+                                            <span class="status-badge status-pending">زیر التواء</span>
+                                        </div>
+                                    </div>
+                                    <div class="transaction-amount withdrawal">-$25.00</div>
+                                </div>
+                                <div style="text-align: center; padding: 2rem; color: #666; display: none;" id="noTransactions">
+                                    <p>ابھی تک کوئی ٹرانزیکشن نہیں</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Settings Tab -->
+                    <div class="tab-content" id="profile">
+                        <div class="content-header">
+                            <h2>پروفائل ترتیبات</h2>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>ذاتی معلومات</h3>
+                            </div>
+                            <form id="profileForm">
+                                <div class="form-group">
+                                    <label for="fullName">پورا نام</label>
+                                    <input type="text" id="fullName" class="form-control" value="جان ڈو">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">صارف نام</label>
+                                    <input type="text" id="username" class="form-control" value="johndoe123" readonly>
+                                    <small style="color: #666;">رجسٹریشن کے بعد صارف نام تبدیل نہیں کیا جا سکتا</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">ای میل ایڈریس</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="email" id="email" class="form-control" value="john.doe@example.com">
+                                        <button type="button" class="btn btn-outline" onclick="requestEmailChange()">ای میل تبدیل کریں</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">فون نمبر</label>
+                                    <input type="tel" id="phone" class="form-control" value="+1 234 567 8900">
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">ملک</label>
+                                    <select id="country" class="form-control">
+                                        <option value="us">United States</option>
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="ca">Canada</option>
+                                        <option value="au">Australia</option>
+                                        <option value="pk" selected>Pakistan</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">پروفائل اپ ڈیٹ کریں</button>
+                            </form>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>پاس ورڈ تبدیل کریں</h3>
+                            </div>
+                            <form id="passwordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">موجودہ پاس ورڈ</label>
+                                    <input type="password" id="currentPassword" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">نیا پاس ورڈ</label>
+                                    <input type="password" id="newPassword" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPassword">نیا پاس ورڈ تصدیق کریں</label>
+                                    <input type="password" id="confirmPassword" class="form-control">
+                                </div>
+                                <button type="submit" class="btn btn-primary">پاس ورڈ تبدیل کریں</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>اپنے اکاؤنٹ میں لاگ ان کریں</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">صارف نام یا ای میل</label>
+                    <input type="text" id="loginUsername" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">پاس ورڈ</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <a href="#" id="forgotPassword">پاس ورڈ بھول گئے؟</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">لاگ ان</button>
+            </form>
+            <div class="modal-footer">
+                <p>اکاؤنٹ نہیں ہے؟ <a href="#" id="showRegister">سائن اپ</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>نیا اکاؤنٹ بنائیں</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regFullName">پورا نام</label>
+                    <input type="text" id="regFullName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">صارف نام</label>
+                    <input type="text" id="regUsername" class="form-control" required>
+                    <small style="color: #666;">رجسٹریشن کے بعد صارف نام تبدیل نہیں کیا جا سکتا</small>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">ای میل ایڈریس</label>
+                    <input type="email" id="regEmail" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">فون نمبر</label>
+                    <input type="tel" id="regPhone" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regCountry">ملک</label>
+                    <select id="regCountry" class="form-control" required>
+                        <option value="">ملک منتخب کریں</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                        <option value="au">Australia</option>
+                        <option value="pk">Pakistan</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">پاس ورڈ</label>
+                    <input type="password" id="regPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">پاس ورڈ تصدیق کریں</label>
+                    <input type="password" id="regConfirmPassword" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="referralCode">حوالہ کوڈ (اختیاری)</label>
+                    <input type="text" id="referralCode" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">اکاؤنٹ بنائیں</button>
+            </form>
+            <div class="modal-footer">
+                <p>پہلے سے اکاؤنٹ ہے؟ <a href="#" id="showLogin">لاگ ان</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo data
+        let userData = {
+            name: "جان ڈو",
+            username: "johndoe123",
+            email: "john.doe@example.com",
+            phone: "+1 234 567 8900",
+            country: "pk",
+            totalEarnings: 0,
+            directReferrals: 0,
+            matrixCycles: 0,
+            matrixProgress: 0,
+            walletBalance: 0,
+            totalDeposits: 0,
+            totalWithdrawals: 0,
+            savedWalletAddress: "",
+            isLoggedIn: false,
+            transactions: [
+                {
+                    type: "deposit",
+                    amount: 50,
+                    date: "2023-10-15 14:30",
+                    status: "completed",
+                    description: "ابتدائی ڈپازٹ"
+                },
+                {
+                    type: "withdrawal",
+                    amount: 25,
+                    date: "2023-10-10 09:15",
+                    status: "pending",
+                    description: "واپسی کی درخواست"
+                }
+            ]
+        };
+
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const dashboardTabs = document.querySelectorAll('.dashboard-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const userDashboard = document.getElementById('userDashboard');
+        const homeSection = document.getElementById('home');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const withdrawForm = document.getElementById('withdrawForm');
+        const savedWalletAddress = document.getElementById('savedWalletAddress');
+        const noWalletAddress = document.getElementById('noWalletAddress');
+        const userWalletAddress = document.getElementById('userWalletAddress');
+        
+        // Company wallet address
+        const companyWallet = "0x252fbC5517345F08B48a77e718d379aeBb34Cf4E";
+        
+        // Pin purchase functionality
+        function updatePinCosts() {
+            const pinQty1 = document.getElementById('pinQty1').value;
+            const pinQty2 = document.getElementById('pinQty2').value;
+            const pinQty3 = document.getElementById('pinQty3').value;
+            
+            document.getElementById('cost1').textContent = '$' + (pinQty1 * 7).toFixed(2);
+            document.getElementById('cost2').textContent = '$' + (pinQty2 * 6).toFixed(2);
+            document.getElementById('cost3').textContent = '$' + (pinQty3 * 5).toFixed(2);
+        }
+        
+        function purchasePins(tier) {
+            let qty, costPerPin, totalCost;
+            
+            if (tier === 1) {
+                qty = document.getElementById('pinQty1').value;
+                costPerPin = 7;
+            } else if (tier === 2) {
+                qty = document.getElementById('pinQty2').value;
+                costPerPin = 6;
+            } else {
+                qty = document.getElementById('pinQty3').value;
+                costPerPin = 5;
+            }
+            
+            totalCost = qty * costPerPin;
+            
+            if (confirm(`کیا آپ واقعی ${qty} پن $${totalCost.toFixed(2)} میں خریدنا چاہتے ہیں؟`)) {
+                alert(`خریداری کامیاب! ${qty} پن آپ کے اکاؤنٹ میں شامل کر دیے گئے ہیں۔`);
+                // In a real application, you would process the payment here
+            }
+        }
+        
+        // Copy wallet address to clipboard
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('والیٹ پتہ کلپ بورڈ پر کاپی ہو گیا!');
+            });
+        }
+        
+        // Mark deposit as paid
+        function markDepositAsPaid() {
+            const amount = prompt("USD میں ڈپازٹ کی رقم درج کریں:");
+            if (amount && !isNaN(amount) && amount >= 50) {
+                if (confirm(`کیا آپ کمپنی والیٹ میں $${amount} کی ڈپازٹ کی تصدیق کرتے ہیں؟`)) {
+                    // In a real application, you would verify the transaction here
+                    userData.walletBalance += parseFloat(amount);
+                    userData.totalDeposits += parseFloat(amount);
+                    
+                    // Add transaction to history
+                    userData.transactions.unshift({
+                        type: "deposit",
+                        amount: parseFloat(amount),
+                        date: new Date().toLocaleString(),
+                        status: "pending",
+                        description: "دستیاب ڈپازٹ"
+                    });
+                    
+                    updateDashboard();
+                    alert('ڈپازٹ ریکارڈ ہو گئی! یہ تصدیق کے بعد کریڈٹ کی جائے گی۔');
+                }
+            } else {
+                alert('براہ کرم درست رقم درج کریں (کم از کم $50)۔');
+            }
+        }
+        
+        // Update dashboard with user data
+        function updateDashboard() {
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('totalEarnings').textContent = '$' + userData.totalEarnings.toFixed(2);
+            document.getElementById('directReferrals').textContent = userData.directReferrals;
+            document.getElementById('matrixCycles').textContent = userData.matrixCycles;
+            document.getElementById('matrixProgress').textContent = userData.matrixProgress + '/5';
+            document.getElementById('walletBalance').textContent = '$' + userData.walletBalance.toFixed(2);
+            document.getElementById('totalDeposits').textContent = '$' + userData.totalDeposits.toFixed(2);
+            document.getElementById('totalWithdrawals').textContent = '$' + userData.totalWithdrawals.toFixed(2);
+            
+            // Update saved wallet address display
+            if (userData.savedWalletAddress) {
+                userWalletAddress.textContent = userData.savedWalletAddress;
+                savedWalletAddress.style.display = 'flex';
+                noWalletAddress.style.display = 'none';
+            } else {
+                savedWalletAddress.style.display = 'none';
+                noWalletAddress.style.display = 'block';
+            }
+            
+            // Update matrix visualization
+            const matrixNodes = document.querySelectorAll('.matrix-node:not(.self)');
+            for (let i = 0; i < matrixNodes.length; i++) {
+                if (i < userData.matrixProgress) {
+                    matrixNodes[i].innerHTML = '<div class="node-name">صارف ' + (i+1) + '</div><div class="node-bonus">40%</div>';
+                    if (userData.matrixProgress === 5 && i === 4) {
+                        matrixNodes[i].classList.add('exited');
+                        matrixNodes[i].innerHTML += '<div style="font-size: 0.6rem; margin-top: 3px;">خارج</div>';
+                    }
+                } else {
+                    matrixNodes[i].innerHTML = '<div class="node-name">خالی</div><div class="node-bonus">0%</div>';
+                    matrixNodes[i].classList.remove('exited');
+                }
+            }
+            
+            // Update transaction history
+            updateTransactionHistory();
+        }
+        
+        // Update transaction history display
+        function updateTransactionHistory() {
+            const transactionHistory = document.getElementById('transactionHistory');
+            const noTransactions = document.getElementById('noTransactions');
+            
+            if (userData.transactions.length === 0) {
+                transactionHistory.innerHTML = '';
+                noTransactions.style.display = 'block';
+                return;
+            }
+            
+            noTransactions.style.display = 'none';
+            let transactionsHTML = '';
+            
+            userData.transactions.forEach(transaction => {
+                const icon = transaction.type === 'deposit' ? 'fa-arrow-down' : 'fa-arrow-up';
+                const iconColor = transaction.type === 'deposit' ? 'var(--secondary)' : 'var(--accent)';
+                const amountClass = transaction.type === 'deposit' ? 'deposit' : 'withdrawal';
+                const amountSign = transaction.type === 'deposit' ? '+' : '-';
+                const statusClass = `status-${transaction.status}`;
+                
+                transactionsHTML += `
+                    <div class="transaction-item">
+                        <div class="transaction-details">
+                            <div class="transaction-icon" style="background-color: ${iconColor};">
+                                <i class="fas ${icon}"></i>
+                            </div>
+                            <div class="transaction-info">
+                                <h4>${transaction.type === 'deposit' ? 'ڈپازٹ' : 'واپسی'}</h4>
+                                <p>${transaction.date}</p>
+                                <span class="status-badge ${statusClass}">${transaction.status === 'completed' ? 'مکمل' : transaction.status === 'pending' ? 'زیر التواء' : 'ناکام'}</span>
+                            </div>
+                        </div>
+                        <div class="transaction-amount ${amountClass}">${amountSign}$${transaction.amount.toFixed(2)}</div>
+                    </div>
+                `;
+            });
+            
+            transactionHistory.innerHTML = transactionsHTML;
+        }
+        
+        // Edit wallet address
+        function editWalletAddress() {
+            const newAddress = prompt("اپنا نیا BEP20 USDT والیٹ پتہ درج کریں:", userData.savedWalletAddress);
+            if (newAddress) {
+                userData.savedWalletAddress = newAddress;
+                updateDashboard();
+                alert('والیٹ پتہ کامیابی سے اپ ڈیٹ ہو گیا!');
+            }
+        }
+        
+        // Modal controls
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+        
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                registerModal.style.display = 'none';
+            });
+        });
+        
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+        });
+        
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+        
+        // Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = link.getAttribute('data-target');
+                
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                document.getElementById(target).classList.add('active');
+            });
+        });
+        
+        // Dashboard tabs
+        dashboardTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                if (tab.id === 'logoutBtn') {
+                    userData.isLoggedIn = false;
+                    userDashboard.style.display = 'none';
+                    homeSection.style.display = 'block';
+                    return;
+                }
+                
+                dashboardTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const tabId = tab.getAttribute('data-tab');
+                
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Form submissions
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real application, you would validate credentials with a server
+            userData.isLoggedIn = true;
+            loginModal.style.display = 'none';
+            homeSection.style.display = 'none';
+            userDashboard.style.display = 'block';
+            updateDashboard();
+        });
+        
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real application, you would send registration data to a server
+            alert('رجسٹریشن کامیاب! براہ کام تصدیق کے لیے اپنا ای میل چیک کریں۔');
+            registerModal.style.display = 'none';
+        });
+        
+        withdrawForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('withdrawAmount').value);
+            const wallet = document.getElementById('withdrawWallet').value;
+            
+            if (!wallet) {
+                alert('براہ کرم اپنا والیٹ پتہ درج کریں۔');
+                return;
+            }
+            
+            if (amount < 10) {
+                alert('کم از کم واپسی کی رقم $10 ہے۔');
+                return;
+            }
+            
+            if (amount > userData.walletBalance) {
+                alert('اس واپسی کے لیے ناکافی بیلنس۔');
+                return;
+            }
+            
+            if (confirm(`کیا آپ ${wallet} پر $${amount.toFixed(2)} کی واپسی کی درخواست کرنا چاہتے ہیں؟`)) {
+                // Save wallet address if not already saved
+                if (!userData.savedWalletAddress) {
+                    userData.savedWalletAddress = wallet;
+                }
+                
+                // Process withdrawal
+                userData.walletBalance -= amount;
+                userData.totalWithdrawals += amount;
+                
+                // Add transaction to history
+                userData.transactions.unshift({
+                    type: "withdrawal",
+                    amount: amount,
+                    date: new Date().toLocaleString(),
+                    status: "pending",
+                    description: "واپسی کی درخواست"
+                });
+                
+                updateDashboard();
+                alert('واپسی کی درخواست جمع کرائی گئی! یہ 24 گھنٹوں کے اندر پروسیس ہو جائے گی۔');
+                withdrawForm.reset();
+            }
+        });
+        
+        document.getElementById('profileForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Update user data
+            userData.name = document.getElementById('fullName').value;
+            userData.email = document.getElementById('email').value;
+            userData.phone = document.getElementById('phone').value;
+            userData.country = document.getElementById('country').value;
+            
+            updateDashboard();
+            alert('پروفائل کامیابی سے اپ ڈیٹ ہو گیا!');
+        });
+        
+        document.getElementById('passwordForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('نئے پاس ورڈ مماثل نہیں ہیں!');
+                return;
+            }
+            
+            // In a real application, you would verify current password and update
+            alert('پاس ورڈ کامیابی سے تبدیل ہو گیا!');
+            document.getElementById('passwordForm').reset();
+        });
+        
+        // Forgot password
+        document.getElementById('forgotPassword').addEventListener('click', (e) => {
+            e.preventDefault();
+            const email = prompt('براہ کرم اپنا ای میل ایڈریس درج کریں:');
+            if (email) {
+                alert('پاس ورڈ ری سیٹ کی ہدایات ' + email + ' پر بھیج دی گئی ہیں۔');
+            }
+        });
+        
+        // Email change request
+        function requestEmailChange() {
+            const newEmail = prompt('اپنا نیا ای میل ایڈریس درج کریں:');
+            if (newEmail) {
+                alert('OTP آپ کے نئے ای میل ایڈریس پر بھیج دیا گیا ہے۔ براہ کرم چیک کر کے تصدیق کریں۔');
+            }
+        }
+        
+        // Buy position button
+        document.getElementById('buyPositionBtn').addEventListener('click', () => {
+            if (userData.matrixProgress < 5) {
+                if (confirm('کیا آپ واقعی $50 میں نیا میٹرکس پوزیشن خریدنا چاہتے ہیں؟')) {
+                    userData.matrixProgress++;
+                    if (userData.matrixProgress === 5) {
+                        userData.matrixCycles++;
+                        userData.totalEarnings += 100; // 200% bonus on $50
+                        userData.walletBalance += 100;
+                        alert('میٹرکس مکمل ہو گیا! آپ کو $100 کا بونس ملا ہے اور آپ میٹرکس سے باہر نکل گئے ہیں۔ آپ کی یونی لیول پوزیشن برقرار رہے گی۔');
+                    }
+                    updateDashboard();
+                }
+            } else {
+                alert('آپ کا میٹرکس پورا ہو چکا ہے۔ آپ کو باہر نکل کر نیا شروع کرنے کی ضرورت ہے۔');
+            }
+        });
+        
+        // Initialize pin cost display
+        document.getElementById('pinQty1').addEventListener('change', updatePinCosts);
+        document.getElementById('pinQty2').addEventListener('change', updatePinCosts);
+        document.getElementById('pinQty3').addEventListener('change', updatePinCosts);
+        updatePinCosts();
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (e.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+        
+        // Initialize dashboard
+        updateDashboard();
+    </script>
+</body>
+</html>
